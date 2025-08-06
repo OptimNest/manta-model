@@ -1,0 +1,53 @@
+STEP 1 - Install Python 3.10
+-> Go to: https://www.python.org/downloads/release/python-3100/
+-> Download the Windows installer (64-bit)
+-> Run the .exe file
+-> On the first screen, check "Add Python to PATH"
+-> Click Install Now and finish installation
+
+STEP 2 - Prepare the project folder
+-> Go to: https://github.com/theSearchLife/manta-model
+-> Click the green Code button - Download ZIP
+-> Or use this link: https://github.com/theSearchLife/manta-model/archive/refs/heads/main.zip
+-> Extract the ZIP - you’ll get a folder named manta-model-main
+-> Move that folder to your Desktop
+
+STEP 3  - Open the Command Prompt
+-> Press Win + R, type cmd, press Enter
+-> Run this command:
+cd "C:\Users\Manta Trust\Desktop\manta-model-main"
+
+STEP 4  -  Install the required libraries
+-> In the same Command Prompt, run:
+pip install -r requirements.txt
+!!Wait until all packages are installed.
+
+STEP 5 – Create the test image folder (in folder manta-main-model)
+Name it - demo_images_test
+Add in this folder the new images!
+
+-> Run this only if you didn’t add manually the folder demo_images_test:
+mkdir demo_images_test
+-> Then:
+-> Open the demo_images_test folder (from the manta-model-main folder)
+-> Add some .jpg or .png images
+
+STEP 6 – Run the model
+-> Run this as one single line:
+python predict_manta.py --folder_images demo_images_test --filename_out results_test.csv --filename_model yolo11cls_manta_640_grayscale.pt --th 0.9
+This will process all images and generate results_test.csv.
+
+
+STEP 7 - Sort the results
+-> Run this:
+python predict_manta_postprocess.py --folder_images demo_images_test --filename_csv results_test.csv --folder_out sorted_test
+-> It will create a sorted_test/ folder with:
+positive/ - manta detected
+negative/ - no manta
+unknown/ - unclear
+
+
+STEP 8 -  For future image batches
+-> Replace the files in demo_images_test/
+-> Delete the folder sorted_test/
+-> Run STEP 3, 4, 6 and STEP 7 again
